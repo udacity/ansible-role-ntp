@@ -13,6 +13,11 @@
   when: ansible_os_family == 'Debian'
   tags: [ 'package', 'ntp' ]
 
+- name: Install an alternate init script for NTP
+  copy: src=etc_init.d_ntp dest=/etc/init.d/ntp mode=0755 owner=root group=root
+  when: ansible_os_family == 'Debian'
+  tags: [ 'package', 'ntp' ]
+
 - name: Copy the ntp.conf template file
   template: src=ntp.conf.j2 dest=/etc/ntp.conf
   notify:
